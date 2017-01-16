@@ -53,6 +53,15 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/master/mahasiswa/update/{nim}', ['as' => 'master.mahasiswa.update', 'uses' => 'Master\MahasiswaController@update']);
         Route::delete('/master/mahasiswa/delete/{nim}', ['as' => 'master.mahasiswa.delete', 'uses' => 'Master\MahasiswaController@delete']);
 
+        // master Grade
+        Route::get('/master/grade/', ['as' => 'master.grade', 'uses' => 'Master\GradeController@index']);
+        Route::get('/master/grade/getDT', ['as' => 'master.grade.getDT', 'uses' => 'Master\GradeController@getDataBtTable']);
+        Route::get('/master/grade/create', ['as' => 'master.grade.create', 'uses' => 'Master\GradeController@create']);
+        Route::post('/master/grade/store', ['as' => 'master.grade.store', 'uses' => 'Master\GradeController@store']);
+        Route::get('/master/grade/edit/{id}', ['as' => 'master.grade.edit', 'uses' => 'Master\GradeController@edit']);
+        Route::post('/master/grade/update/{id}', ['as' => 'master.grade.update', 'uses' => 'Master\GradeController@update']);
+        Route::delete('/master/grade/delete/{id}', ['as' => 'master.grade.delete', 'uses' => 'Master\GradeController@delete']);
+
         // master mata kuliah
         Route::get('/master/mk/', ['as' => 'master.mk', 'uses' => 'Master\MataKuliahController@index']);
         Route::get('/master/mk/create', ['as' => 'master.mk.create', 'uses' => 'Master\MataKuliahController@create']);
@@ -94,6 +103,17 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('/akma/editmkmhs/', ['as' => 'akma.editmkmhs', 'uses' => 'Akma\EditMKMahasiswaController@index']);
 
+        // Input Absensi
+        Route::get('/akma/absen/', ['as' => 'akma.absen', 'uses' => 'Akma\InputAbsenController@index']);
+        Route::post('/akma/absen/loadKelas/', ['as' => 'akma.absen.loadKelas', 'uses' => 'Akma\InputAbsenController@loadKelasBerdasarkan']);
+        Route::post('/akma/absen/loadDaftarMahasiswa/', ['as' => 'akma.absen.loadDaftarMahasiswa', 'uses' => 'Akma\InputAbsenController@loadDaftarMahasiswa']);
+        Route::post('/akma/absen/simpan/{kelas}', ['as' => 'akma.absen.simpan', 'uses' => 'Akma\InputAbsenController@simpan']);
+
+        // input nilai mahasiswa
+        Route::get('/akma/nilai-mahasiswa/', ['as' => 'akma.nilai-mahasiswa', 'uses' => 'Akma\NilaiMahasiswaController@index']);
+        Route::post('/akma/nilai-mahasiswa/loadKelas', ['as' => 'akma.nilai-mahasiswa.loadKelas', 'uses' => 'Akma\NilaiMahasiswaController@loadKelas']);
+        Route::post('/akma/nilai-mahasiswa/loadDaftarMahasiswa/', ['as' => 'akma.nilai-mahasiswa.loadDaftarMahasiswa', 'uses' => 'Akma\NilaiMahasiswaController@loadDaftarMahasiswa']);
+        Route::post('/akma/nilai-mahasiswa/simpan/{kelas}', ['as' => 'akma.nilai-mahasiswa.simpan', 'uses' => 'Akma\NilaiMahasiswaController@simpan']);
     });
 
 });

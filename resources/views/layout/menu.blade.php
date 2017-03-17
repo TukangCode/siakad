@@ -40,6 +40,21 @@
                 </ul>
             </li>
             @endcan
+            @can('dataIniHanyaBisaDipakaiOleh', 'dosen')
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-star-half-full"></i>
+                    <span>Dosen</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('dosen.jadwal') }}"><i class="fa fa-calendar"></i> Jadwal</a></li>
+                    <li><a href="{{ route('dosen.tugas') }}"><i class="fa fa-pencil-square-o"></i> Tugas</a></li>
+                    <li><a href="{{ route('dosen.materi') }}"><i class="fa fa-book"></i> Materi</a></li>
+					<li><a href="{{ route('dosen.pengumuman') }}"><i class="fa fa-volume-up"></i> Pengumuman</a></li>
+                </ul>
+            </li>
+            @endcan
             @can('dataIniHanyaBisaDipakaiOleh', 'mahasiswa')
             <li class="treeview">
                 <a href="#">

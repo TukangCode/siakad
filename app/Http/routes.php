@@ -11,7 +11,6 @@
 |
 */
 //Route::auth();
-
 Route::group(['middleware' => ['web']], function () {
 
     // Authentication Routes...
@@ -114,6 +113,42 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/akma/nilai-mahasiswa/loadKelas', ['as' => 'akma.nilai-mahasiswa.loadKelas', 'uses' => 'Akma\NilaiMahasiswaController@loadKelas']);
         Route::post('/akma/nilai-mahasiswa/loadDaftarMahasiswa/', ['as' => 'akma.nilai-mahasiswa.loadDaftarMahasiswa', 'uses' => 'Akma\NilaiMahasiswaController@loadDaftarMahasiswa']);
         Route::post('/akma/nilai-mahasiswa/simpan/{kelas}', ['as' => 'akma.nilai-mahasiswa.simpan', 'uses' => 'Akma\NilaiMahasiswaController@simpan']);
-    });
+		
+		//Jadwal Untuk dosen
+		Route::get('/dosen/jadwal/', ['as' => 'dosen.jadwal', 'uses' => 'Dosen\JadwalController@index']);
+		Route::get('/dosen/jadwal/getDT', ['as' => 'dosen.jadwal.getDT', 'uses' => 'Dosen\JadwalController@getDataBtTable']);
+		Route::post('/dosen/jadwal/store', ['as' => 'dosen.jadwal.store', 'uses' => 'Dosen\JadwalController@store']);
+		Route::get('/dosen/jadwal/edit/{id}', ['as' => 'dosen.jadwal.edit', 'uses' => 'Dosen\JadwalController@edit']);		
+        Route::post('/dosen/jadwal/update/{id}', ['as' => 'dosen.jadwal.update', 'uses' => 'Dosen\JadwalController@update']);		
 
+		//Tugas
+		Route::get('/dosen/tugas/', ['as' => 'dosen.tugas', 'uses' => 'Dosen\TugasController@index']);
+		Route::get('/dosen/tugas/getDT', ['as' => 'dosen.tugas.getDT', 'uses' => 'Dosen\TugasController@getDataBtTable']);
+		Route::get('/dosen/tugas/create', ['as' => 'dosen.tugas.create', 'uses' => 'Dosen\TugasController@create']);
+		Route::post('/dosen/tugas/store', ['as' => 'dosen.tugas.store', 'uses' => 'Dosen\TugasController@store']);
+		Route::get('/dosen/tugas/edit/{id}', ['as' => 'dosen.tugas.edit', 'uses' => 'Dosen\TugasController@edit']);
+		Route::post('/dosen/tugas/update/{id}', ['as' => 'dosen.tugas.update', 'uses' => 'Dosen\TugasController@update']);
+		Route::delete('/dosen/tugas/delete/{id}', ['as' => 'dosen.tugas.delete', 'uses' => 'Dosen\TugasController@delete']);
+		//Materi
+		Route::get('/dosen/materi/', ['as' => 'dosen.materi', 'uses' => 'Dosen\MateriController@index']);
+		Route::get('/dosen/materi/getDT', ['as' => 'dosen.materi.getDT', 'uses' => 'Dosen\MateriController@getDataBtTable']);
+		Route::get('/dosen/materi/create', ['as' => 'dosen.materi.create', 'uses' => 'Dosen\MateriController@create']);
+		Route::post('/dosen/materi/store', ['as' => 'dosen.materi.store', 'uses' => 'Dosen\MateriController@store']);
+		Route::get('/dosen/materi/edit/{id}', ['as' => 'dosen.materi.edit', 'uses' => 'Dosen\MateriController@edit']);
+		Route::post('/dosen/materi/update/{id}', ['as' => 'dosen.materi.update', 'uses' => 'Dosen\MateriController@update']);
+		Route::delete('/dosen/materi/delete/{id}', ['as' => 'dosen.tugas.delete', 'uses' => 'Dosen\MateriController@delete']);
+		//Pengumuman untuk dosen
+		Route::get('/dosen/pengumuman/', ['as' => 'dosen.pengumuman', 'uses' => 'Dosen\PengumumanController@index']);
+		Route::get('/dosen/pengumuman/getDT', ['as' => 'dosen.pengumuman.getDT', 'uses' => 'Dosen\PengumumanController@getDataBtTable']);
+		Route::get('/dosen/pengumuman/create', ['as' => 'dosen.pengumuman.create', 'uses' => 'Dosen\PengumumanController@create']);
+		Route::post('/dosen/pengumuman/store', ['as' => 'dosen.pengumuman.store', 'uses' => 'Dosen\PengumumanController@store']);
+		Route::get('/dosen/pengumuman/edit/{id}', ['as' => 'dosen.pengumuman.edit', 'uses' => 'Dosen\PengumumanController@edit']);
+		Route::post('/dosen/pengumuman/update/{id}', ['as' => 'dosen.pengumuman.update', 'uses' => 'Dosen\PengumumanController@update']);		
+		Route::delete('/dosen/pengumuman/delete/{id}', ['as' => 'dosen.tugas.delete', 'uses' => 'Dosen\PengumumanController@delete']);
+    });
+});
+//Route::model('mahasiswa', 'Mahasiswa');
+Route::group(array('prefix'=>'api'),function(){
+	Route::resource('mahasiswa','MahasiswaApiController@index',array('except'=>array('create','edit')));
+	Route::get('/jadwal/', ['as' => 'api.jadwal', 'uses' => 'MahasiswaApiController@jadwal']);
 });

@@ -76,13 +76,13 @@ class MateriFactory extends AbstractFactory
      * @param $input
      * @return bool
      */
-    protected function realSave(MahasiswaUtkAkma $model, $input)
+    protected function realSave(Materi $model, $input)
     {
         try {
             \DB::transaction(function () use ($model, $input) {
                 $model->fill($input);
                 $model->save();
-                $this->last_insert_id = $model->nomor_induk;
+                $this->last_insert_id = $model->id;
             });
         } catch (\Exception $e) {
             \Log::alert("Bad Happen:" . $e->getMessage() . "\n" . $e->getTraceAsString(), ['input'=>Arr::flatten($input)]);
@@ -98,7 +98,7 @@ class MateriFactory extends AbstractFactory
      */
     public function store($input)
     {
-        return $this->realSave(new MahasiswaUtkAkma(), $input);
+        return $this->realSave(new Materi(), $input);
     }
 
     /**
@@ -107,11 +107,11 @@ class MateriFactory extends AbstractFactory
      * @param $nim
      * @return bool
      */
-    public function delete($nim)
+    public function delete($id)
     {
         try {
-            \DB::transaction(function () use ($nim) {
-                Mahasiswa::findOrFail($nim)->delete();
+            \DB::transaction(function () use ($id) {
+                Materi::findOrFail($id)->delete();
             });
         } catch (\Exception $e) {
             \Log::alert("Bad Happen:" . $e->getMessage() . "\n" . $e->getTraceAsString(), ['id'=>$pk->id]);

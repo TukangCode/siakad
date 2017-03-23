@@ -4,7 +4,7 @@ namespace Stmik\Http\Requests;
 
 use Stmik\Http\Requests\Request;
 
-class JadwalRequest extends Request
+class MateriRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,9 @@ class JadwalRequest extends Request
     public function rules()
     {
         return [
-            'hari' => 'required',
-			'pengampu_id' => 'required|exists:pengampu_kelas,id',
-			'jam_masuk' => 'required|date_format:H:i',
-			'jam_keluar' => 'required|date_format:H:i|after:jam_masuk',
-			'ruangan_id' => 'required|exists:ruangans,id'
+			//'pengampu_id' => 'required',
+			//'nama_materi' => 'required',
+			//'filename' => 'required|mimes:zip,rar',
         ];
     }
 }

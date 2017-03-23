@@ -26,6 +26,20 @@
             @can('mengaksesIniRolenyaHarus', 'akma')
             <li class="treeview">
                 <a href="#">
+                    <i class="fa fa-graduation-cap"></i>
+                    <span>Aktivitas Kampus</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('aktivitas.jadwal') }}"><i class="fa fa-calendar"></i> Jadwal</a></li>
+                    <li><a href="{{ route('aktivitas.ruangan') }}"><i class="fa fa-university"></i> Ruangan</a></li>
+					<li><a href="{{ route('aktivitas.pengumuman') }}"><i class="fa fa-bullhorn"></i> Pengumuman</a></li>
+                </ul>
+            </li>
+            @endcan			
+            @can('mengaksesIniRolenyaHarus', 'akma')
+            <li class="treeview">
+                <a href="#">
                     <i class="fa fa-star-half-full"></i>
                     <span>Master</span>
                     <i class="fa fa-angle-left pull-right"></i>

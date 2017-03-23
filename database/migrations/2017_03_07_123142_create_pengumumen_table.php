@@ -16,7 +16,7 @@ class CreatePengumumenTable extends Migration
             $table->increments('id');
 			$table->string('perihal',50);
 			$table->string('keterangan');
-			$table->string('dosen_id',15)->index();
+			$table->string('user_id',30)->index();
             $table->timestamps();
         });
     }

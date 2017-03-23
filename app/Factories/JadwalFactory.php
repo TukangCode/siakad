@@ -14,7 +14,7 @@ use Illuminate\Support\Arr;
 use Stmik\Jadwal;
 use Stmik\PengampuKelas;
 
-class JadwalFactory extends AbstractFactory
+class JadwalFactory extends MasterJadwalFactory
 {
 
     /**
@@ -50,78 +50,6 @@ class JadwalFactory extends AbstractFactory
             ['id','hari', 'jam_masuk', 'jam_keluar', 'dosen_id','pengampu_id', 'mata_kuliah_id','ruangan_id'],
             ['nama'=>'m.nama']  // karena ada yang double untuk nama maka mapping ke m.nama (matakuliah)
         );
-    }
-    public function getDataJadwal($id = null)
-    {
-        if($id===null) {
-            // kembalikan langsung saja link polymorphic nya yang pasti merupakan mahasiswa
-            return \Auth::user()->owner;
-        }
-        // kalau di sini cari manual
-        // karena id sudah diset sebagai nomor induk mahasiswa maka ...
-        return Jadwal::findOrFail($id);
-    }
-    /**
-     * Update data
-     * @param $nim
-     * @param $input
-     * @return bool
-     */
-    public function update($id, $input)
-    {
-        return $this->realSave(
-            Jadwal::findOrFail($id),
-            $input
-        );
-    }
-
-    /**
-     * Penyimpanan realnya di sini
-     * @param MahasiswaUtkAkma $model
-     * @param $input
-     * @return bool
-     */
-    protected function realSave(Jadwal $model, $input)
-    {
-        try {
-            \DB::transaction(function () use ($model, $input) {
-                $model->fill($input);
-                $model->save();
-            });
-        } catch (\Exception $e) {
-            \Log::alert("Bad Happen:" . $e->getMessage() . "\n" . $e->getTraceAsString(), ['input'=>Arr::flatten($input)]);
-            $this->errors->add('sys', $e->getMessage());
-        }
-        return $this->errors->count() <= 0;
-    }
-
-    /**
-     * Buat data baru
-     * @param $input
-     * @return bool
-     */
-    public function store($input)
-    {
-        return $this->realSave(new MahasiswaUtkAkma(), $input);
-    }
-
-    /**
-     * Hapuskan mahasiswa ini
-     * TODO: WARNING test terhadap data berelasi dengan master ini belum dilakukan :D Tambahkan fungsi utk check atau tambahkan foreign key
-     * @param $nim
-     * @return bool
-     */
-    public function delete($nim)
-    {
-        try {
-            \DB::transaction(function () use ($nim) {
-                Mahasiswa::findOrFail($nim)->delete();
-            });
-        } catch (\Exception $e) {
-            \Log::alert("Bad Happen:" . $e->getMessage() . "\n" . $e->getTraceAsString(), ['id'=>$pk->id]);
-            $this->errors->add('sys', $e->getMessage());
-        }
-        return $this->errors->count() <= 0;
     }
 
 }

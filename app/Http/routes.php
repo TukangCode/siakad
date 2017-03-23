@@ -113,6 +113,31 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/akma/nilai-mahasiswa/loadKelas', ['as' => 'akma.nilai-mahasiswa.loadKelas', 'uses' => 'Akma\NilaiMahasiswaController@loadKelas']);
         Route::post('/akma/nilai-mahasiswa/loadDaftarMahasiswa/', ['as' => 'akma.nilai-mahasiswa.loadDaftarMahasiswa', 'uses' => 'Akma\NilaiMahasiswaController@loadDaftarMahasiswa']);
         Route::post('/akma/nilai-mahasiswa/simpan/{kelas}', ['as' => 'akma.nilai-mahasiswa.simpan', 'uses' => 'Akma\NilaiMahasiswaController@simpan']);
+
+		//Jadwal Untuk Master
+		Route::get('/aktivitas/jadwal/', ['as' => 'aktivitas.jadwal', 'uses' => 'Master\MasterJadwalController@index']);
+		Route::get('/aktivitas/jadwal/getDT', ['as' => 'aktivitas.jadwal.getDT', 'uses' => 'Master\MasterJadwalController@getDataBtTable']);
+		Route::get('/aktivitas/jadwal/create', ['as' => 'aktivitas.jadwal.create', 'uses' => 'Master\MasterJadwalController@create']);
+		Route::post('/aktivitas/jadwal/store', ['as' => 'aktivitas.jadwal.store', 'uses' => 'Master\MasterJadwalController@store']);
+		Route::get('/aktivitas/jadwal/edit/{id}', ['as' => 'aktivitas.jadwal.edit', 'uses' => 'Master\MasterJadwalController@edit']);		
+        Route::post('/akativitas/jadwal/update/{id}', ['as' => 'aktivitas.jadwal.update', 'uses' => 'Master\MasterJadwalController@update']);
+		Route::delete('/aktivitas/jadwal/delete/{id}', ['as' => 'aktivitas.jadwal.delete', 'uses' => 'Master\MasterJadwalController@delete']);	
+		//Pengumuman untuk Master
+		Route::get('/aktivitas/pengumuman/', ['as' => 'aktivitas.pengumuman', 'uses' => 'Master\PengumumanController@index']);
+		Route::get('/aktivitas/pengumuman/getDT', ['as' => 'aktivitas.pengumuman.getDT', 'uses' => 'Master\PengumumanController@getDataBtTable']);
+		Route::get('/aktivitas/pengumuman/create', ['as' => 'aktivitas.pengumuman.create', 'uses' => 'Master\PengumumanController@create']);
+		Route::post('/aktivitas/pengumuman/store', ['as' => 'aktivitas.pengumuman.store', 'uses' => 'Master\PengumumanController@store']);
+		Route::get('/aktivitas/pengumuman/edit/{id}', ['as' => 'aktivitas.pengumuman.edit', 'uses' => 'Master\PengumumanController@edit']);
+		Route::post('/aktivitas/pengumuman/update/{id}', ['as' => 'aktivitas.pengumuman.update', 'uses' => 'Master\PengumumanController@update']);		
+		Route::delete('/aktivitas/pengumuman/delete/{id}', ['as' => 'aktivitas.tugas.delete', 'uses' => 'Master\PengumumanController@delete']);
+		//ruangan
+		Route::get('/aktivitas/ruangan/', ['as' => 'aktivitas.ruangan', 'uses' => 'Master\RuanganController@index']);
+		Route::get('/aktivitas/ruangan/getDT', ['as' => 'aktivitas.ruangan.getDT', 'uses' => 'Master\RuanganController@getDataBtTable']);
+		Route::get('/aktivitas/ruangan/create', ['as' => 'aktivitas.ruangan.create', 'uses' => 'Master\RuanganController@create']);
+		Route::post('/aktivitas/ruangan/store', ['as' => 'aktivitas.ruangan.store', 'uses' => 'Master\RuanganController@store']);
+		Route::get('/aktivitas/ruangan/edit/{id}', ['as' => 'aktivitas.ruangan.edit', 'uses' => 'Master\RuanganController@edit']);		
+        Route::post('/akativitas/ruangan/update/{id}', ['as' => 'aktivitas.ruangan.update', 'uses' => 'Master\RuanganController@update']);
+		Route::delete('/aktivitas/ruangan/delete/{id}', ['as' => 'aktivitas.ruangan.delete', 'uses' => 'Master\RuanganController@delete']);			
 		
 		//Jadwal Untuk dosen
 		Route::get('/dosen/jadwal/', ['as' => 'dosen.jadwal', 'uses' => 'Dosen\JadwalController@index']);
@@ -149,6 +174,10 @@ Route::group(['middleware' => ['web']], function () {
 });
 //Route::model('mahasiswa', 'Mahasiswa');
 Route::group(array('prefix'=>'api'),function(){
-	Route::resource('mahasiswa','MahasiswaApiController@index',array('except'=>array('create','edit')));
+	//Route::resource('mahasiswa','MahasiswaApiController@index',array('except'=>array('create','edit')));
 	Route::get('/jadwal/', ['as' => 'api.jadwal', 'uses' => 'MahasiswaApiController@jadwal']);
+	Route::get('/tugas/', ['as' => 'api.tugas', 'uses' => 'MahasiswaApiController@tugas']);
+	Route::get('/nilai/', ['as' => 'api.nilai', 'uses' => 'MahasiswaApiController@nilai']);
+	Route::get('/materi/', ['as' => 'api.materi', 'uses' => 'MahasiswaApiController@materi']);	
+	Route::get('/pengumuman/', ['as' => 'api.pengumuman', 'uses' => 'MahasiswaApiController@pengumuman']);
 });

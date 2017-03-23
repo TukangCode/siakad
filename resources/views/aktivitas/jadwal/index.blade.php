@@ -8,9 +8,22 @@
             <div class="col-md-12">
                 <div class="box box-default">
                     <div class="box-body">
+                        <form id="dt-toolbar" class="form-inline" role="form">
+                            <a data-toggle="modal" data-target="#modal-util" data-ic-target="#modal-util-body"
+                               data-ic-get-from="{{ route('aktivitas.jadwal.create')}}" title="Tambah Mahasiswa"
+                               class="btn btn-default form-control"><i class="fa fa-plus-circle"></i> Tambah</a>&nbsp;
+                            <label for="ta">Filter:&nbsp;</label>
+                            <select class="form-control" id="jurusan">
+
+                            </select>
+                            <select class="form-control" id="status">
+  
+                            </select>
+                            <a onclick="MasterMhs.sendFilter(event)" id="send-filter" class="form-control btn btn-sm btn-warning"><i class="fa fa-exchange"></i> </a>
+                        </form>
                         <table id="master-mhs" class="table"
                                data-toolbar="#dt-toolbar"
-                               data-url="{{ route('dosen.jadwal.getDT')}}"
+                               data-url="{{ route('aktivitas.jadwal.getDT')}}"
                                data-pagination="true"
                                data-classes="table table-hover table-condensed"
                                data-striped="true"
@@ -26,6 +39,7 @@
 								<th data-field="nama" data-sortable="true">Matakuliah</th>
                                 <th data-field="jam_masuk" data-sortable="true">Jam masuk</th>
                                 <th data-field="jam_keluar" data-sortable="true">Jam keluar</th>
+								<th data-field="dosen_id" data-sortable="true">Dosen</th>
                                 <th data-field="ruang" data-sortable="true">Ruangan</th>
                                 <th data-width="100px" data-formatter="MasterMhs.loadAksi" data-events="eventAksi">Aksi</th>
                             </tr>
@@ -50,8 +64,11 @@
         loadAksi: function(value, row, index) {
             return [
                 '<a data-toggle="modal" data-target="#modal-util" data-ic-target="#modal-util-body" ' +
-                'title="Edit Jadwal Ini" data-ic-get-from="http://localhost/siakad/public/dosen/jadwal/edit/' + row['id'] + '"' +
-                ' class="btn btn-xs bg-blue"><i class="fa fa-edit"></i></a>'
+                'title="Edit Jadwal Ini" data-ic-get-from="http://localhost/siakad/public/aktivitas/jadwal/edit/' + row['id'] + '"' +
+                ' class="btn btn-xs bg-blue"><i class="fa fa-edit"></i></a>',
+                '<a title="Hapus Data Jadwal Ini" data-ic-delete-from="http://localhost/siakad/public/aktivitas/jadwal/delete/' + row['id'] + '"' +
+                    ' data-ic-target="closest tr" data-ic-confirm="Yakin menghapus data Jadwal ini?" ' +
+                    ' class="btn btn-xs bg-red-active"><i class="fa fa-trash"></i></a>'				
             ].join('&nbsp;');
         },
         addFilter: function (p) {

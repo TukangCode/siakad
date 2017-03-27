@@ -47,7 +47,7 @@ class RuanganController extends Controller
     {
         $input = $request->all();
         if($this->factory->store($input)) {
-            return $this->create()->with('success', "Data Ruangan {$this->factory->ruang()} telah ditambahkan, silahkan lakukan proses penambahan lainnya!");
+            return $this->create()->with('success', "Data Ruangan {$this->factory->ruang} telah ditambahkan, silahkan lakukan proses penambahan lainnya!");
         }
         return response(json_encode($this->factory->getErrors()), 500);
     }

@@ -4,7 +4,8 @@ namespace Stmik\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Stmik\Http\Requests;
+//use Stmik\Http\Requests;
+use Stmik\Http\Requests\PengumumanRequest;
 use Stmik\Mahasiswa;
 use Stmik\Jadwal;
 use Stmik\RincianStudi;
@@ -15,16 +16,12 @@ use Stmik\Materi;
 
 class MahasiswaApiController extends Controller
 {	
-	public function index()
+	public function login(PengumumanRequest $request)
 	{
-		//$mhs=dosen::all();
-		//return Response::json($mhs,200);
-        $mhs = Mahasiswa::paginate(10);
-        return Response()->json($mhs, 200)
-		->header('Access-Control-Allow-Origin','*')
-		->header('Access-Control-Allow-methods','GET, POST');
+        $input = $request->all();
+        return Response()->json($input, 200);
 	}
-	public function jadwal()
+	public function jadwal($nim)
 	{
         $jadwal = RincianStudi::join('pengampu_kelas','rincian_studi.kelas_diambil_id','=','pengampu_kelas.id')
 			->join('mata_kuliah','pengampu_kelas.mata_kuliah_id','=','mata_kuliah.id')
@@ -33,13 +30,11 @@ class MahasiswaApiController extends Controller
 			->join('ruangans','jadwal.ruangan_id','=','ruangans.id')
 			->join('rencana_studi','rincian_studi.rencana_studi_id','=','rencana_studi.id')
 			->select(['mata_kuliah.nama as matakuliah','jadwal.hari','jadwal.jam_masuk','jadwal.jam_keluar','ruangans.ruang','dosen.nama as dosen'])
-			->where('mahasiswa_id','=','CMHSTEST01')
+			->where('mahasiswa_id','=',$nim)
 			->paginate(20);
-        return Response()->json($jadwal, 200)
-		->header('Access-Control-Allow-Origin','*')
-		->header('Access-Control-Allow-methods','GET, POST');
+        return Response()->json($jadwal, 200);
 	}
-	public function tugas()
+	public function tugas($nim)
 	{
         $tugas = Tugas::join('pengampu_kelas','tugas.pengampu_id','=','pengampu_kelas.id')
 			->join('mata_kuliah','pengampu_kelas.mata_kuliah_id','=','mata_kuliah.id')
@@ -47,13 +42,15 @@ class MahasiswaApiController extends Controller
 			->join('rincian_studi','pengampu_kelas.id','=','rincian_studi.kelas_diambil_id')
 			->join('rencana_studi','rincian_studi.rencana_studi_id','=','rencana_studi.id')
 			->select(['tugas.nama_tugas','tugas.deadline','tugas.keterangan','mata_kuliah.nama as matakuliah','dosen.nama as dosen'])
-			->where('mahasiswa_id','=','CMHSTEST01')
+			->where('mahasiswa_id','=',$nim)
 		->paginate(20);
-        return Response()->json($tugas, 200)
-		->header('Access-Control-Allow-Origin','*')
-		->header('Access-Control-Allow-methods','GET, POST');
+        if($tugas){
+            return Response()->json($tugas, 200);
+        } else {
+			return response()->json(array("message" => "nim tidak ditemukan"), 403);	
+		}
 	}
-	public function materi()
+	public function materi($nim)
 	{
         $materi = Materi::join('pengampu_kelas','materis.pengampu_id','=','pengampu_kelas.id')
 			->join('mata_kuliah','pengampu_kelas.mata_kuliah_id','=','mata_kuliah.id')
@@ -61,37 +58,31 @@ class MahasiswaApiController extends Controller
 			->join('rincian_studi','pengampu_kelas.id','=','rincian_studi.kelas_diambil_id')
 			->join('rencana_studi','rincian_studi.rencana_studi_id','=','rencana_studi.id')
 			->select(['materis.id','materis.nama_materi','materis.filename','mata_kuliah.nama as matakuliah','dosen.nama as dosen'])
-			->where('mahasiswa_id','=','CMHSTEST01')
+			->where('mahasiswa_id','=',$nim)
 		->paginate(20);
-        return Response()->json($materi, 200)
-		->header('Access-Control-Allow-Origin','*')
-		->header('Access-Control-Allow-methods','GET, POST');
+        return Response()->json($materi, 200);
 	}
-	public function nilai()
+	public function nilai($nim)
 	{
         $nilai = RencanaStudi::join('rincian_studi as r','rencana_studi.id','=','r.rencana_studi_id')
 			->join('pengampu_kelas as p','r.kelas_diambil_id','=','p.id')
 			->join('mata_kuliah','p.mata_kuliah_id','=','mata_kuliah.id')
 			->join('dosen','p.dosen_id','=','dosen.nomor_induk')	
 			->join('mata_kuliah as m','p.mata_kuliah_id','=','m.id')
-			->select(['m.nama','r.nilai_tugas','r.nilai_praktikum','r.nilai_uts','r.nilai_uas','r.nilai_akhir','r.status_lulus','r.nilai_huruf','mata_kuliah.nama as matakuliah','dosen.nama as dosen'])
-			->where('mahasiswa_id','=','CMHSTEST01')
+			->select(['m.nama as matakuliah','r.nilai_tugas','r.nilai_praktikum','r.nilai_uts','r.nilai_uas','r.nilai_akhir','r.status_lulus','r.nilai_huruf','dosen.nama as dosen'])
+			->where('mahasiswa_id','=',$nim)
 			->paginate(20);
-        return Response()->json($nilai, 200)
-		->header('Access-Control-Allow-Origin','*')
-		->header('Access-Control-Allow-methods','GET, POST');
+        return Response()->json($nilai, 200);
 	}
-	public function pengumuman()
+	public function pengumuman($nim)
 	{
         $info = RencanaStudi::join('rincian_studi as r','rencana_studi.id','=','r.rencana_studi_id')
 			->join('pengampu_kelas as p','r.kelas_diambil_id','=','p.id')
-			->join('dosen as d','p.dosen_id','=','d.nomor_induk')
-			->join('pengumuman','d.nomor_induk','=','pengumuman.user_id')
+			->join('pengumuman','p.dosen_id','=','pengumuman.user_id')
+			->join('dosen as d','pengumuman.user_id','=','d.nomor_induk')
 			->select(['d.nama as dosen','pengumuman.perihal','pengumuman.keterangan'])
-			->where('mahasiswa_id','=','CMHSTEST01')
+			->where('mahasiswa_id','=',$nim)
 			->paginate(20);
-        return Response()->json($info, 200)
-		->header('Access-Control-Allow-Origin','*')
-		->header('Access-Control-Allow-methods','GET, POST');
+        return Response()->json($info, 200);
 	}
 }

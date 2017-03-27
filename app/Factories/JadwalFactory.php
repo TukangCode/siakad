@@ -1,8 +1,8 @@
 <?php
 /**
- * Ini untuk master mahasiswa
- * User: toni
- * Date: 11/04/16
+ * Ini untuk Dosen mengatur jadwal
+ * User: Yudi Hartono
+ * Date: 02/03/17
  * Time: 12:55
  */
 

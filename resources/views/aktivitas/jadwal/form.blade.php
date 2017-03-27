@@ -13,7 +13,7 @@
     <div class="form-group">
         <label for="pengampu_id" class="col-md-3 control-label">Matakuliah</label>
         <div class="col-md-9">
-            {!! load_select_model('pengampu_id', \Stmik\Factories\MatakuliahFactory::getPengampuMatakuliahLists(),
+            {!! load_select_model('pengampu_id', \Stmik\Factories\MatakuliahFactory::getMatakuliahLists(),
                 $data, ['class'=>'form-control']) !!}
             <div id="error-pengampu_id" class="error"></div>
         </div>
@@ -70,5 +70,8 @@ $('#frmMMhs').on('error.ic', function (evt, elt, stat, str, xhr) {
 @if(isset($success))
     $('#message-success').text("{{$success}}").closest('div.form-group').show();
     MasterMhs.onEditSuccess(); // trigger it!
+@endif
+@if(isset($error))
+    $('#message-error').text("{{$error}}").closest('div.form-group').show();
 @endif
 </script>

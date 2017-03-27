@@ -22,14 +22,31 @@ class MatakuliahFactory extends AbstractFactory
      */
     public static function getMatakuliahLists()
     {
+		/**
         $s = MataKuliah::all();
         $a = [];
         foreach ($s as $m) {
             $a[$m->id] =$m->kode." ".$m->nama;
         }
         return $a;
+		**/
+        $p = PengampuKelas::join('mata_kuliah as m', function($join){
+                $join->on('pengampu_kelas.mata_kuliah_id', '=', 'm.id');
+		    })
+			->select('pengampu_kelas.id','m.nama','m.kode')
+			->get();
+        $a = [];
+        foreach ($p as $m) {
+            $a[$m->id] = $m->kode ." ".$m->nama;
+        }
+        return $a;
     }
-
+    /**
+     * Dapatkan daftar matakuliah dosen, mengembalikan berupa array dengan key adalah pengampu_id dan nilainya adalah nama matakuliah
+     * lengkap
+     * @return array
+     */
+	 
     public static function getPengampuMatakuliahLists()
     {
         $p = PengampuKelas::join('mata_kuliah as m', function($join){

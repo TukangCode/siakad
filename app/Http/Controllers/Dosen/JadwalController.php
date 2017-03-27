@@ -2,12 +2,10 @@
 
 namespace Stmik\Http\Controllers\Dosen;
 
-//use Illuminate\Http\Request;
 use Stmik\Factories\JadwalFactory;
 use Stmik\Http\Controllers\Controller;
 use Stmik\Http\Controllers\GetDataBTTableTrait;
 use Stmik\Http\Requests\JadwalRequest;
-//use Stmik\Http\Requests;
 
 class JadwalController extends Controller
 {

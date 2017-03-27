@@ -11,15 +11,7 @@
                         <form id="dt-toolbar" class="form-inline" role="form">
                             <a data-toggle="modal" data-target="#modal-util" data-ic-target="#modal-util-body"
                                data-ic-get-from="{{ route('aktivitas.jadwal.create')}}" title="Tambah Mahasiswa"
-                               class="btn btn-default form-control"><i class="fa fa-plus-circle"></i> Tambah</a>&nbsp;
-                            <label for="ta">Filter:&nbsp;</label>
-                            <select class="form-control" id="jurusan">
-
-                            </select>
-                            <select class="form-control" id="status">
-  
-                            </select>
-                            <a onclick="MasterMhs.sendFilter(event)" id="send-filter" class="form-control btn btn-sm btn-warning"><i class="fa fa-exchange"></i> </a>
+                               class="btn btn-default form-control"><i class="fa fa-plus-circle"></i> Tambah</a>
                         </form>
                         <table id="master-mhs" class="table"
                                data-toolbar="#dt-toolbar"
@@ -39,7 +31,7 @@
 								<th data-field="nama" data-sortable="true">Matakuliah</th>
                                 <th data-field="jam_masuk" data-sortable="true">Jam masuk</th>
                                 <th data-field="jam_keluar" data-sortable="true">Jam keluar</th>
-								<th data-field="dosen_id" data-sortable="true">Dosen</th>
+								<th data-field="dosen" data-sortable="true">Dosen</th>
                                 <th data-field="ruang" data-sortable="true">Ruangan</th>
                                 <th data-width="100px" data-formatter="MasterMhs.loadAksi" data-events="eventAksi">Aksi</th>
                             </tr>

@@ -33,14 +33,17 @@ class MasterJadwalController extends Controller
     {
         return view('aktivitas.jadwal.form')
             ->with('data', $this->factory->getDataJadwal($id))
-            ->with('action', route('dosen.jadwal.update', ['id'=>$id]));
+            ->with('action', route('aktivitas.jadwal.update', ['id'=>$id]));
     }
     public function update($id, JadwalRequest $request)
     {
         $input = $request->all();
-        if($this->factory->update($id, $input)) {
-            return $this->edit($id)->with('success', "Data Jadwal telah terupdate!");
-        }
+		if($this->factory->checkValidJadwal($id, $input)){
+			return $this->edit($id)->with('error', "ada jadwal yang sama!");
+		}
+        //if($this->factory->update($id, $input)) {
+        //    return $this->edit($id)->with('success', "Data Jadwal telah terupdate!");
+        //}
         return response(json_encode($this->factory->getErrors()), 500);
     }
     public function store(JadwalRequest $request)

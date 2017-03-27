@@ -172,12 +172,16 @@ Route::group(['middleware' => ['web']], function () {
 		Route::delete('/dosen/pengumuman/delete/{id}', ['as' => 'dosen.tugas.delete', 'uses' => 'Dosen\PengumumanController@delete']);
     });
 });
-//Route::model('mahasiswa', 'Mahasiswa');
+
 Route::group(array('prefix'=>'api'),function(){
-	//Route::resource('mahasiswa','MahasiswaApiController@index',array('except'=>array('create','edit')));
-	Route::get('/jadwal/', ['as' => 'api.jadwal', 'uses' => 'MahasiswaApiController@jadwal']);
-	Route::get('/tugas/', ['as' => 'api.tugas', 'uses' => 'MahasiswaApiController@tugas']);
-	Route::get('/nilai/', ['as' => 'api.nilai', 'uses' => 'MahasiswaApiController@nilai']);
-	Route::get('/materi/', ['as' => 'api.materi', 'uses' => 'MahasiswaApiController@materi']);	
-	Route::get('/pengumuman/', ['as' => 'api.pengumuman', 'uses' => 'MahasiswaApiController@pengumuman']);
+	Route::group(['middleware' => 'cors'], function() { 	
+		Route::get('/login/', ['as' => 'api.login', 'uses' => 'ApiAuthController@user_login']);
+		Route::group(['middleware' => 'token.check'], function() { 	
+			Route::get('/jadwal/{nim}/{token}', ['as' => 'api.jadwal', 'uses' => 'MahasiswaApiController@jadwal']);
+			Route::get('/tugas/{nim}/{token}', ['as' => 'api.tugas', 'uses' => 'MahasiswaApiController@tugas']);
+			Route::get('/nilai/{nim}/{token}', ['as' => 'api.nilai', 'uses' => 'MahasiswaApiController@nilai']);
+			Route::get('/materi/{nim}/{token}', ['as' => 'api.materi', 'uses' => 'MahasiswaApiController@materi']);	
+			Route::get('/pengumuman/{nim}/{token}', ['as' => 'api.pengumuman', 'uses' => 'MahasiswaApiController@pengumuman']);
+		});
+	});
 });

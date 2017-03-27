@@ -1,8 +1,8 @@
 <?php
 /**
- * Ini untuk master mahasiswa
- * User: toni
- * Date: 11/04/16
+ * Ini untuk Master mengatur jadwal
+ * User: Yudi Hartono
+ * Date: 02/03/17
  * Time: 12:55
  */
 
@@ -25,19 +25,12 @@ class MasterJadwalFactory extends AbstractFactory
      */
     public function getBTTable($pagination, Request $request)
     {
-        // proses filter
-        $filter = isset($pagination['otherQuery']['filter'])? $pagination['otherQuery']['filter']: [];
-        $pengampu_kelas = isset($filter['pengampu_kelas'][0]) ? $filter['pengampu_kelas']: null;
-        $status  = isset($filter['hari'][0]) ? $filter['hari']: null;
         $builder = \DB::table('jadwal as j')
 			->join('ruangans as r', function ($join) {
 				$join->on('j.ruangan_id', '=', 'r.id');
 				})	
-            ->join('pengampu_kelas as p', function($join) use($pengampu_kelas){
+            ->join('pengampu_kelas as p', function($join){
                 $join->on('j.pengampu_id', '=', 'p.id');
-                if($pengampu_kelas!==null) {
-                    $join->where('p.id', '=', $pengampu_kelas);
-                }
             })
 			->join('mata_kuliah as m', function ($join) {
 				$join->on('p.mata_kuliah_id', '=', 'm.id');
@@ -45,18 +38,17 @@ class MasterJadwalFactory extends AbstractFactory
 			->join('dosen as d', function ($join) {
 				$join->on('p.dosen_id', '=', 'd.nomor_induk');
 				})	
-            ->select(['j.id','j.hari', 'j.jam_masuk', 'j.jam_keluar','j.pengampu_id', 'p.dosen_id','d.nama', 'p.mata_kuliah_id','m.nama','j.ruangan_id','r.ruang']);
+            ->select(['j.id','j.hari', 'j.jam_masuk', 'j.jam_keluar','j.pengampu_id','d.nama as dosen','m.nama','r.ruang']);
 
         return $this->getBTData($pagination,
             $builder,
-            ['id','hari', 'jam_masuk', 'jam_keluar', 'dosen_id','pengampu_id', 'mata_kuliah_id','ruangan_id']
-            //['nama'=>'m.nama'] // karena ada yang double untuk nama maka mapping ke m.nama (matakuliah)
+            ['id','hari', 'jam_masuk', 'jam_keluar', 'dosen', 'pengampu_id', 'matakuliah','ruang']
 		);
     }
     public function getDataJadwal($id = null)
     {
         if($id===null) {
-            // kembalikan langsung saja link polymorphic nya yang pasti merupakan mahasiswa
+            // kembalikan langsung saja link polymorphic nya
             return \Auth::user()->owner;
         }
         // kalau di sini cari manual
@@ -125,5 +117,10 @@ class MasterJadwalFactory extends AbstractFactory
         }
         return $this->errors->count() <= 0;
     }
+	
+	public function checkValidJadwal($id, $input)
+	{
+		return $id;
+	}
 
 }

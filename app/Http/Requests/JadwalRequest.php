@@ -26,8 +26,8 @@ class JadwalRequest extends Request
         return [
             'hari' => 'required',
 			'pengampu_id' => 'required|exists:pengampu_kelas,id',
-			'jam_masuk' => 'required|date_format:H:i',
-			'jam_keluar' => 'required|date_format:H:i|after:jam_masuk',
+			'jam_masuk' => 'required|date_format:H:i:s',
+			'jam_keluar' => 'required|date_format:H:i:s|after:jam_masuk',
 			'ruangan_id' => 'required|exists:ruangans,id'
         ];
     }

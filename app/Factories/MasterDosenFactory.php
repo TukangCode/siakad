@@ -11,11 +11,9 @@ namespace Stmik\Factories;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
-use Stmik\Jadwal;
-use Stmik\PengampuKelas;
-use Stmik\Tugas;
+use Stmik\Dosen;
 
-class TugasFactory extends AbstractFactory
+class MasterDosenFactory extends DosenFactory
 {
 
     /**
@@ -28,61 +26,49 @@ class TugasFactory extends AbstractFactory
     {
         // proses filter
         $filter = isset($pagination['otherQuery']['filter'])? $pagination['otherQuery']['filter']: [];
-        $pengampu_kelas = isset($filter['pengampu_kelas'][0]) ? $filter['pengampu_kelas']: null;
-        $status  = isset($filter['hari'][0]) ? $filter['hari']: null;
-        $builder = \DB::table('tugas as t')				
-			->join('pengampu_kelas as p', function ($join) {
-				$join->on('t.pengampu_id', '=', 'p.id');
-				})
-			->join('mata_kuliah as m', function ($join) {
-				$join->on('p.mata_kuliah_id', '=', 'm.id');
-				})	
-            ->select(['t.id','p.dosen_id', 'p.mata_kuliah_id','m.nama','t.pengampu_id','t.nama_tugas','t.keterangan','t.deadline'])
-			->where('p.dosen_id', '=', \Auth::user()->owner_id);
-
+        $jurusan = isset($filter['jurusan'][0]) ? $filter['jurusan']: null;
+        $builder = \DB::table('dosen as d')
+            ->join('jurusan as j', function($join) use($jurusan){
+                $join->on('d.jurusan_id', '=', 'j.id');
+                if($jurusan!==null) {
+                    $join->where('j.id', '=', $jurusan);
+                }
+            })
+            ->select(['d.nama','d.nomor_induk','d.jenis_kelamin','d.agama','d.nidn','d.alamat','d.status_aktif','d.hp','d.status']);
+        // proses status
         return $this->getBTData($pagination,
             $builder,
-            ['id','nama_tugas','keterangan','deadline','dosen_id', 'mata_kuliah_id'] 
-			// karena ada yang double untuk nama maka mapping ke m.nama (matakuliah)
+            ['nomor_induk','nama', 'nidn', 'jenis_kelamin','hp','status','alamat']
         );
     }
-    public function getDataTugas($id = null)
-    {
-        if($id===null) {
-            // kembalikan langsung saja link polymorphic nya yang pasti merupakan mahasiswa
-            return \Auth::user()->owner;
-        }
-        // kalau di sini cari manual
-        // karena id sudah diset sebagai nomor induk mahasiswa maka ...
-        return Tugas::findOrFail($id);
-    }
+
     /**
      * Update data
-     * @param $nim
+     * @param $nomor_induk
      * @param $input
      * @return bool
      */
-    public function update($id, $input)
+    public function update($nomor_induk, $input)
     {
         return $this->realSave(
-            Tugas::findOrFail($id),
+            Dosen::findOrFail($nomor_induk),
             $input
         );
     }
 
     /**
      * Penyimpanan realnya di sini
-     * @param MahasiswaUtkAkma $model
+     * @param Dosen $model
      * @param $input
      * @return bool
      */
-    protected function realSave(Tugas $model, $input)
+    protected function realSave(Dosen $model, $input)
     {
         try {
             \DB::transaction(function () use ($model, $input) {
                 $model->fill($input);
                 $model->save();
-                $this->last_insert_id = $model->id;
+                $this->last_insert_id = $model->nomor_induk;
             });
         } catch (\Exception $e) {
             \Log::alert("Bad Happen:" . $e->getMessage() . "\n" . $e->getTraceAsString(), ['input'=>Arr::flatten($input)]);
@@ -98,20 +84,20 @@ class TugasFactory extends AbstractFactory
      */
     public function store($input)
     {
-        return $this->realSave(new Tugas(), $input);
+        return $this->realSave(new Dosen(), $input);
     }
 
     /**
      * Hapuskan mahasiswa ini
      * TODO: WARNING test terhadap data berelasi dengan master ini belum dilakukan :D Tambahkan fungsi utk check atau tambahkan foreign key
-     * @param $nim
+     * @param $nomor_induk
      * @return bool
      */
-    public function delete($id)
+    public function delete($nomor_induk)
     {
         try {
-            \DB::transaction(function () use ($id) {
-                Tugas::findOrFail($id)->delete();
+            \DB::transaction(function () use ($nomor_induk) {
+                Dosen::findOrFail($nomor_induk)->delete();
             });
         } catch (\Exception $e) {
             \Log::alert("Bad Happen:" . $e->getMessage() . "\n" . $e->getTraceAsString(), ['id'=>$pk->id]);

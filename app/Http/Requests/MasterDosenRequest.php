@@ -4,7 +4,7 @@ namespace Stmik\Http\Requests;
 
 use Stmik\Http\Requests\Request;
 
-class MateriRequest extends Request
+class MasterDosenRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,15 +18,19 @@ class MateriRequest extends Request
 
     /**
      * Get the validation rules that apply to the request.
-     *
+     * TODO: tambahkan validasi untuk unique nim dan juga untuk format nya ...
      * @return array
      */
     public function rules()
     {
         return [
-			'pengampu_id' => 'required',
-			'nama_materi' => 'required',
-			'filename' => 'required|mimes:zip,rar,txt,jpeg,jpg,png',
+            'nama' => 'required',
+			'nomor_induk' => 'required',
+            'jurusan_id' => 'required|exists:jurusan,id',
+            'tempat_lahir' => 'required',
+            'tgl_lahir' => 'required',
+            'jenis_kelamin' =>'required',
+            'agama' => 'required'
         ];
     }
 }

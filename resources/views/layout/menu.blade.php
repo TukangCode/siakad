@@ -45,7 +45,7 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Dosen</a></li>
+                    <li><a href="{{ route('master.dosen') }}"><i class="fa fa-circle-o"></i> Dosen</a></li>
                     <li><a href="{{ route('master.mahasiswa') }}"><i class="fa fa-circle-o"></i> Mahasiswa</a></li>
                     <li><a href="#"><i class="fa fa-circle-o"></i> Pegawai</a></li>
                     <li><a href="{{ route('master.grade') }}"><i class="fa fa-circle-o"></i> Grade Nilai</a></li>

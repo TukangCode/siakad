@@ -69,7 +69,7 @@
                 'title="Edit Mahasiswa Ini" data-ic-get-from="http://localhost/siakad/public/master/mahasiswa/edit/'+ row['nomor_induk'] +'"'+ 
                 ' class="btn btn-xs bg-blue"><i class="fa fa-edit"></i></a>',
                 '<a data-toggle="modal" data-target="#modal-util" data-ic-target="#modal-util-body" ' +
-                    'title="Set User Account" data-ic-get-from="/user/setUserUntuk/' + row['nomor_induk'] + '/mahasiswa" '+
+                    'title="Set User Account" data-ic-get-from="http://localhost/siakad/public/user/setUserUntuk/' + row['nomor_induk'] + '/mahasiswa" '+
                     ' class="btn btn-xs bg-red"><i class="fa fa-user"></i></a>',
                 '<a title="Hapus Data Mahasiswa Ini" data-ic-delete-from="http://localhost/siakad/public/master/mahasiswa/delete/' + row['nomor_induk'] + '"' +
                     ' data-ic-target="closest tr" data-ic-confirm="Yakin menghapus data mahasiswa ini?" ' +

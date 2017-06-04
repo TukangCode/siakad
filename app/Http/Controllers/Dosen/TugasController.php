@@ -47,7 +47,7 @@ class TugasController extends Controller
     {
         $input = $request->all();
         if($this->factory->store($input)) {
-            return $this->create()->with('success', "Data NIM {$this->factory->getLastInsertId()} telah ditambahkan, silahkan lakukan proses penambahan lainnya!");
+            return $this->create()->with('success', "Data Tugas telah ditambahkan, silahkan lakukan proses penambahan lainnya!");
         }
         return response(json_encode($this->factory->getErrors()), 500);
     }

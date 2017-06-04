@@ -1,9 +1,10 @@
-<?php
+<?php 
 
 namespace Stmik\Http\Controllers\Master;
 
 use Stmik\Factories\MasterJadwalFactory;
 use Stmik\Http\Controllers\Controller;
+use Stmik\Http\Controllers\input;
 use Stmik\Http\Controllers\GetDataBTTableTrait;
 use Stmik\Http\Requests\JadwalRequest;
 
@@ -38,20 +39,26 @@ class MasterJadwalController extends Controller
     public function update($id, JadwalRequest $request)
     {
         $input = $request->all();
-		if($this->factory->checkValidJadwal($id, $input)){
+		if($this->factory->checkValidJadwal($id,$request)){
 			return $this->edit($id)->with('error', "ada jadwal yang sama!");
+		}else{
+			if($this->factory->update($id, $input)) {
+				return $this->edit($id)->with('success', "Data Jadwal telah terupdate!");
+			}
 		}
-        //if($this->factory->update($id, $input)) {
-        //    return $this->edit($id)->with('success', "Data Jadwal telah terupdate!");
-        //}
+
         return response(json_encode($this->factory->getErrors()), 500);
     }
     public function store(JadwalRequest $request)
     {
         $input = $request->all();
-        if($this->factory->store($input)) {
-            return $this->create()->with('success', "Data NIM {$this->factory->getLastInsertId()} telah ditambahkan, silahkan lakukan proses penambahan lainnya!");
-        }
+		if($this->factory->checkValidJadwal(null,$request)){
+			return $this->create()->with('error', "ada jadwal yang sama!");
+		}else{
+			if($this->factory->store($input)) {
+				return $this->create()->with('success', "Data jadwal {$this->factory->getLastInsertId()} telah ditambahkan, silahkan lakukan proses penambahan lainnya!");
+			}
+		}
         return response(json_encode($this->factory->getErrors()), 500);
     }
     public function delete($id)

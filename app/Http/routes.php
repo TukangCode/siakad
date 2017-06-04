@@ -52,6 +52,15 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/master/mahasiswa/update/{nim}', ['as' => 'master.mahasiswa.update', 'uses' => 'Master\MahasiswaController@update']);
         Route::delete('/master/mahasiswa/delete/{nim}', ['as' => 'master.mahasiswa.delete', 'uses' => 'Master\MahasiswaController@delete']);
 
+        // master mahasiswa
+        Route::get('/master/dosen/', ['as' => 'master.dosen', 'uses' => 'Master\DosenController@index']);
+        Route::get('/master/dosen/getDT', ['as' => 'master.dosen.getDT', 'uses' => 'Master\DosenController@getDataBtTable']);
+        Route::get('/master/dosen/create', ['as' => 'master.dosen.create', 'uses' => 'Master\DosenController@create']);
+        Route::post('/master/dosen/store', ['as' => 'master.dosen.store', 'uses' => 'Master\DosenController@store']);
+        Route::get('/master/dosen/edit/{nomor_induk}}', ['as' => 'master.dosen.edit', 'uses' => 'Master\DosenController@edit']);
+        Route::post('/master/dosen/update/{nomor_induk}', ['as' => 'master.dosen.update', 'uses' => 'Master\DosenController@update']);
+        Route::delete('/master/dosen/delete/{nomor_induk}', ['as' => 'master.dosen.delete', 'uses' => 'Master\DosenController@delete']);
+		
         // master Grade
         Route::get('/master/grade/', ['as' => 'master.grade', 'uses' => 'Master\GradeController@index']);
         Route::get('/master/grade/getDT', ['as' => 'master.grade.getDT', 'uses' => 'Master\GradeController@getDataBtTable']);
@@ -182,6 +191,8 @@ Route::group(array('prefix'=>'api'),function(){
 			Route::get('/nilai/{nim}/{token}', ['as' => 'api.nilai', 'uses' => 'MahasiswaApiController@nilai']);
 			Route::get('/materi/{nim}/{token}', ['as' => 'api.materi', 'uses' => 'MahasiswaApiController@materi']);	
 			Route::get('/pengumuman/{nim}/{token}', ['as' => 'api.pengumuman', 'uses' => 'MahasiswaApiController@pengumuman']);
+
 		});
 	});
+	Route::get('/download/{filename}', ['as' => 'api.download', 'uses' => 'MahasiswaApiController@download']);
 });

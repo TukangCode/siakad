@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Stmik\Jadwal;
 use Stmik\PengampuKelas;
+use Stmik\Http\Controllers\input;
 
 class MasterJadwalFactory extends AbstractFactory
 {
@@ -118,8 +119,25 @@ class MasterJadwalFactory extends AbstractFactory
         return $this->errors->count() <= 0;
     }
 	
-	public function checkValidJadwal($id, $input)
-	{
+	public function checkValidJadwal($id,$request)
+	{			
+		if(
+			Jadwal::where('hari', '=', $request->input('hari'))
+			->where('ruangan_id', '=', $request->input('ruangan_id'))
+			->where('jam_masuk', '=', $request->input('jam_masuk'))->first()
+			){
+			return true;
+		}
+		else if(
+			Jadwal::where('hari', '=', $request->input('hari'))
+			->where('ruangan_id', '=', $request->input('ruangan_id'))
+			->where('jam_keluar', '<=', $request->input('jam_masuk'))->first()
+			){
+			return true;
+		}else{
+			return false;
+		}
+		
 		return $id;
 	}
 

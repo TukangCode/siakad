@@ -16,11 +16,6 @@ use Stmik\Materi;
 
 class MahasiswaApiController extends Controller
 {	
-	public function login(PengumumanRequest $request)
-	{
-        $input = $request->all();
-        return Response()->json($input, 200);
-	}
 	public function jadwal($nim)
 	{
         $jadwal = RincianStudi::join('pengampu_kelas','rincian_studi.kelas_diambil_id','=','pengampu_kelas.id')
@@ -84,5 +79,14 @@ class MahasiswaApiController extends Controller
 			->where('mahasiswa_id','=',$nim)
 			->paginate(20);
         return Response()->json($info, 200);
+	}
+	public function download($filename)
+	{
+		$file= public_path(). "/materi/".$filename;
+
+		$headers = array(
+				'Content-Type: application/zip',
+			);
+		return Response()->download($file);
 	}
 }

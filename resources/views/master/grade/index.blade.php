@@ -10,7 +10,7 @@
                     <div class="box-body">
                         <form id="dt-toolbar" class="form-inline" role="form">
                             <a data-toggle="modal" data-target="#modal-util" data-ic-target="#modal-util-body"
-                               data-ic-get-from="/master/grade/create" title="Tambah Standar Grade"
+                               data-ic-get-from="{{ route('master.grade.create') }}" title="Tambah Standar Grade"
                                class="btn btn-default form-control"><i class="fa fa-plus-circle"></i> Tambah</a>&nbsp;
                         </form>
                         <table id="mater-grade" class="table"
@@ -77,9 +77,9 @@
         loadAksi: function(value, row, index) {
             return [
                 '<a data-toggle="modal" data-target="#modal-util" data-ic-target="#modal-util-body" ' +
-                'title="Edit Grade Ini" data-ic-get-from="/master/grade/edit/' + row['id'] + '"' +
+                'title="Edit Grade Ini" data-ic-get-from="http://localhost/siakad/public/master/grade/edit/' + row['id'] + '"' +
                 ' class="btn btn-xs bg-blue"><i class="fa fa-edit"></i></a>',
-                '<a title="Hapus Data Mahasiswa Ini" data-ic-delete-from="/master/grade/delete/' + row['id'] + '"' +
+                '<a title="Hapus Data Mahasiswa Ini" data-ic-delete-from="http://localhost/siakad/public/master/grade/delete/' + row['id'] + '"' +
                     ' data-ic-target="closest tr" data-ic-confirm="Yakin menghapus data grade ini?" ' +
                     ' class="btn btn-xs bg-red-active"><i class="fa fa-trash"></i></a>'
             ].join('&nbsp;');

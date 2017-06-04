@@ -13,7 +13,7 @@
                         <form id="dt-toolbar" class="form-inline" role="form">
                             <a id="cmdRiwayatAkademik" data-toggle="modal" data-target="#modal-util"
                                data-ic-target="#modal-util-body"
-                               data-ic-get-from="/mhs/hasilStudy/ips"
+                               data-ic-get-from="{{ route('mhs.hasilStudy.ips') }}"
                                data-ic-include="#nim"
                                data-ic-trigger-on="nim-sudah-tersedia"
                                title="Indek Prestasi Sementara Per Semester"
@@ -82,11 +82,11 @@
         loadStatus: function(value, row, index) {
             var a = [];
             if(row['tampil_di_transkrip']== {{ \Stmik\RincianStudi::STATUS_TAMPIL_DI_TRANSKRIP_TDK }}) {
-                a[0] = '<a data-ic-replace-target=true data-ic-post-to="/akma/mkdouble/status/'+row['ris_id']+ '" ' +
+                a[0] = '<a data-ic-replace-target=true data-ic-post-to="http://localhost/siakad/public/akma/mkdouble/status/'+row['ris_id']+ '" ' +
                         'data-ic-confirm="Yakin untuk menampilkan di transkrip?" ' +
                         'title="Klik Untuk Menampilkan Nilai Ini" class="btn btn-xs bg-red">DISEMBUNYIKAN!</a>';
             } else {
-                a[0] = '<a data-ic-replace-target=true data-ic-post-to="/akma/mkdouble/status/'+row['ris_id']+ '" ' +
+                a[0] = '<a data-ic-replace-target=true data-ic-post-to="http://localhost/siakad/public/akma/mkdouble/status/'+row['ris_id']+ '" ' +
                         'data-ic-confirm="Yakin untuk tidak menampilkan di transkrip?" ' +
                         'title="Klik Untuk Tidak Menampilkan Nilai Ini" class="btn btn-xs bg-green">TAMPIL!</a>';
             }

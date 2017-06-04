@@ -39,7 +39,7 @@ class PengumumanController extends Controller
     {
         $input = $request->all();
         if($this->factory->update($id, $input)) {
-            return $this->edit($id)->with('success', "Data Jadwal telah terupdate!");
+            return $this->edit($id)->with('success', "Data pengumuman telah terupdate!");
         }
         return response(json_encode($this->factory->getErrors()), 500);
     }
@@ -47,7 +47,7 @@ class PengumumanController extends Controller
     {
         $input = $request->all();
         if($this->factory->store($input)) {
-            return $this->create()->with('success', "Data NIM {$this->factory->getLastInsertId()} telah ditambahkan, silahkan lakukan proses penambahan lainnya!");
+            return $this->create()->with('success', "Data pengumuman telah ditambahkan, silahkan lakukan proses penambahan lainnya!");
         }
         return response(json_encode($this->factory->getErrors()), 500);
     }

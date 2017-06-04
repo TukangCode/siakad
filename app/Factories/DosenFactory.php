@@ -22,4 +22,15 @@ class DosenFactory extends AbstractFactory
     {
         return Dosen::pluck('nama', 'nomor_induk')->all();
     }
+	
+    public function getDataDosen($nomor_induk = null)
+    {
+        if($nomor_induk===null) {
+            // kembalikan langsung saja link polymorphic nya yang pasti merupakan mahasiswa
+            return \Auth::user()->owner;
+        }
+        // kalau di sini cari manual
+        // karena id sudah diset sebagai nomor induk mahasiswa maka ...
+        return Dosen::findOrFail($nomor_induk);
+    }
 }

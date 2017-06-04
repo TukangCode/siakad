@@ -10,7 +10,7 @@
                     <div class="box-body">
                         <form id="dt-toolbar" class="form-inline" role="form">
                             <a data-toggle="modal" data-target="#modal-util" data-ic-target="#modal-util-body"
-                               data-ic-get-from="{{ route('aktivitas.jadwal.create')}}" title="Tambah Mahasiswa"
+                               data-ic-get-from="{{ route('aktivitas.jadwal.create')}}" title="Tambah Jadwal"
                                class="btn btn-default form-control"><i class="fa fa-plus-circle"></i> Tambah</a>
                         </form>
                         <table id="master-mhs" class="table"

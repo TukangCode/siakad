@@ -32,21 +32,19 @@ class MateriController extends Controller
     }
     public function store(MateriRequest $request)
     {
+        $input = $request->all();
 		if($request->hasFile('filename')) {
             $file = $request->file('filename');
             //getting timestamp
             $timestamp = date('Ymd_His', strtotime('now', time()));
 
-            $nama_file = $timestamp. '-' .$request->filename->extension();
-            
-            $request->filename = $nama_file;
+            $input['filename'] = 'materi_'.$timestamp. '.' .$request->filename->extension();
 
-            $file->move(public_path().'/materi/', $nama_file);
+            $file->move(public_path().'/materi/', $input['filename']);
         }
-        $input = $request->all();
 
         if($this->factory->store($input)) {
-            return $this->create()->with('success', "Data NIM {$this->factory->getLastInsertId()} telah ditambahkan, silahkan lakukan proses penambahan lainnya!");
+            return $this->create()->with('success', "Data Materi telah ditambahkan, silahkan lakukan proses penambahan lainnya!");
         }
         return response(json_encode($this->factory->getErrors()), 500);
     }
@@ -55,6 +53,22 @@ class MateriController extends Controller
         return view('dosen.materi.form')
             ->with('data', $this->factory->getDataMateri($id))
             ->with('action', route('dosen.materi.update', ['id'=>$id]));
+    }
+	
+    public function update($id, MateriRequest $request)
+    {
+        $input = $request->all();
+        if($this->factory->update($id, $input)) {
+            return $this->edit($id)->with('success', "Data Materi telah terupdate!");
+        }
+        return response(json_encode($this->factory->getErrors()), 500);
+    }
+    public function delete($id)
+    {
+        if($this->factory->delete($id)) {
+            return response("", 200,['X-IC-Remove'=>true]);
+        }
+        return response(json_encode($this->factory->getErrors()), 500,['X-IC-Remove'=>false]);
     }
 
 }

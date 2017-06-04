@@ -10,7 +10,7 @@
                     <div class="box-body">
                         <form id="dt-toolbar" class="form-inline" role="form">
                             <a data-toggle="modal" data-target="#modal-util" data-ic-target="#modal-util-body"
-                               data-ic-get-from="/master/mk/create" title="Tambah Mata Kuliah Baru"
+                               data-ic-get-from="{{ route('master.mk.create') }}" title="Tambah Mata Kuliah Baru"
                                 class="btn btn-default form-control"><i class="fa fa-plus-circle"></i> Tambah</a>&nbsp;
                             <label for="ta">Filter:&nbsp;</label>
                             <select class="form-control" id="jurusan">
@@ -76,7 +76,7 @@
         loadAksi: function(value, row, index) {
             return [
                 '<a data-toggle="modal" data-target="#modal-util" data-ic-target="#modal-util-body" ' +
-                    'title="Edit Mata Kuliah" data-ic-get-from="/master/mk/edit/' + row['id'] + '"' +
+                    'title="Edit Mata Kuliah" data-ic-get-from="http://localhost/siakad/public/master/mk/edit/' + row['id'] + '"' +
                     ' class="btn btn-xs bg-blue"><i class="fa fa-edit"></a>'
             ].join('&nbsp;');
         },

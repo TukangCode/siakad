@@ -10,7 +10,7 @@
                     <div class="box-body">
                         <form id="dt-toolbar" class="form-inline" role="form">
                             <a data-toggle="modal" data-target="#modal-util" data-ic-target="#modal-util-body"
-                               data-ic-get-from="/akma/dkmk/create" title="Pencatatan Baru"
+                               data-ic-get-from="{{ route('akma.dkmk.create') }}" title="Pencatatan Baru"
                                class="btn btn-default form-control"><i class="fa fa-plus-circle"></i> Tambah</a>&nbsp;
                             <label for="ta">Filter:&nbsp;</label>
                             <select class="form-control" id="ta">
@@ -78,12 +78,12 @@
         loadAksi: function(value, row, index) {
             return [
                 '<a data-toggle="modal" data-target="#modal-util" data-ic-target="#modal-util-body" ' +
-                'title="Edit Dosen Pengampu Kelas" data-ic-get-from="/akma/dkmk/edit/' + row['id'] + '"' +
+                'title="Edit Dosen Pengampu Kelas" data-ic-get-from="http://localhost/siakad/public/akma/dkmk/edit/' + row['id'] + '"' +
                 ' class="btn btn-xs bg-blue"><i class="fa fa-edit"></i></a>',
                 '<a data-ic-confirm="Data yang terhapus tidak dapat dikembalikan, yakin menghapus?" ' +
-                'data-ic-target="closest tr" data-ic-delete-from="/akma/dkmk/delete/' + row['id'] + '" title="Hapus ..." ' +
+                'data-ic-target="closest tr" data-ic-delete-from="http://localhost/siakad/public/akma/dkmk/delete/' + row['id'] + '" title="Hapus ..." ' +
                 'class="btn btn-xs bg-red"><i class="fa fa-trash-o"></i></a>',
-                '<a target="_blank" href="/akma/dkmk/absensi/' + row['id'] + '" title="Cetak Form Absensi Mata Kuliah..." ' +
+                '<a target="_blank" href="http://localhost/siakad/public/akma/dkmk/absensi/' + row['id'] + '" title="Cetak Form Absensi Mata Kuliah..." ' +
                 'class="btn btn-xs bg-aqua-active"><i class="fa fa-list-ol"></i></a>'
             ].join('&nbsp;');
         },

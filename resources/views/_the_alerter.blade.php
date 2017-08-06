@@ -12,3 +12,10 @@
         </div>
     </div>
 </div>
+<div id="alerter-warning" class="form-group" style="display: none;">
+    <div class="col-md-12">
+        <div class="alert alert-warning">
+            <span id="message-warning"></span>
+        </div>
+    </div>
+</div>

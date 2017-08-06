@@ -61,13 +61,13 @@
         loadStatus: function(value, row, index) {
             var a = [];
             if(row['status_FRS']=='{{ \Stmik\RencanaStudi::STATUS_DRAFT }}') {
-                a[0] = '<a data-ic-replace-target=true data-ic-post-to="/akma/persetujuanFRS/status/'+row['id_FRS']+ '" ' +
+                a[0] = '<a data-ic-replace-target=true data-ic-post-to="http://localhost/siakad/public/akma/persetujuanFRS/status/'+row['id_FRS']+ '" ' +
                         'data-ic-confirm="Yakin untuk menyetujui?" title="Klik Untuk Menyetujui" class="btn btn-xs bg-red">Draft!</a>';
             } else {
-                a[0] = '<a data-ic-replace-target=true data-ic-post-to="/akma/persetujuanFRS/status/'+row['id_FRS']+ '" ' +
+                a[0] = '<a data-ic-replace-target=true data-ic-post-to="http://localhost/siakad/public/akma/persetujuanFRS/status/'+row['id_FRS']+ '" ' +
                         'data-ic-confirm="Yakin untuk membatalkan?" title="Klik Untuk Membatalkan Persetujuan" class="btn btn-xs bg-green">Disetujui!</a>';
             }
-            a[1] = '<a target="_blank" href="/mhs/frs/cetakKRS/'+row['nomor_induk']+'" title="Klik melihat KRS" class="btn btn-xs bg-black">KRS</a>';
+            a[1] = '<a target="_blank" href="http://localhost/siakad/public/mhs/frs/cetakKRS/'+row['nomor_induk']+'" title="Klik melihat KRS" class="btn btn-xs bg-black">KRS</a>';
             return a.join('&nbsp;');
         },
         addFilter: function (p) {

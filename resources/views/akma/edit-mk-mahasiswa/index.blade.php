@@ -16,7 +16,7 @@
                                class="btn btn-info"><span class="glyphicon glyphicon-print"></span> Cetak FRS</a>
                             <a id="cmdRiwayatAkademik" data-toggle="modal" data-target="#modal-util"
                                data-ic-target="#modal-util-body"
-                               data-ic-get-from="/mhs/hasilStudy/ips"
+                               data-ic-get-from="{{ route('mhs.hasilStudy.ips') }}"
                                data-ic-include="#nim"
                                data-ic-trigger-on="nim-sudah-tersedia"
                                title="Indek Prestasi Sementara Per Semester"
@@ -97,12 +97,12 @@
         },
         loadStatus: function(value, row, index) {
             if(row['terpilih']==1) {
-                return '<a data-ic-replace-target=true data-ic-post-to="/mhs/frs/batalkanPemilihanKelasIni/' + row['id']
+                return '<a data-ic-replace-target=true data-ic-post-to="http://localhost/siakad/public/mhs/frs/batalkanPemilihanKelasIni/' + row['id']
                         + '" class="btn btn-xs bg-red" data-ic-include="#nim" '
                         + ' data-ic-confirm="Yakin untuk membatalkan pemilihan kelas ini?" title="Batalkan Pemilihan Kelas Ini">&nbsp;<i class="fa fa-flag">'
                         + '</i> Terpilih</a>';
             } else {
-                return '<a data-ic-replace-target=true data-ic-post-to="/mhs/frs/pilihKelasIni/' + row['id']
+                return '<a data-ic-replace-target=true data-ic-post-to="http://localhost/siakad/public/mhs/frs/pilihKelasIni/' + row['id']
                         + '" class="btn btn-xs bg-green" data-ic-include="#nim"'
                         + ' data-ic-confirm="Yakin memilih ini?" title="Pilih Kelas Ini">&nbsp;<i class="fa fa-check-circle">'
                         + '</i> Pilih</a>';

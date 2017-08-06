@@ -50,5 +50,7 @@ class Kernel extends HttpKernel
         'guest' => \Stmik\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'auth.role' => \Stmik\Http\Middleware\RoleAksesHarusIni::class,
+		'cors' => \Stmik\Http\Middleware\Cors::class,
+		'token.check' => \Stmik\Http\Middleware\TokenCheck::class,
     ];
 }

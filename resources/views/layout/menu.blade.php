@@ -26,16 +26,46 @@
             @can('mengaksesIniRolenyaHarus', 'akma')
             <li class="treeview">
                 <a href="#">
+                    <i class="fa fa-graduation-cap"></i>
+                    <span>Aktivitas Kampus</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('aktivitas.jadwal') }}"><i class="fa fa-calendar"></i> Jadwal</a></li>
+                    <li><a href="{{ route('aktivitas.ruangan') }}"><i class="fa fa-university"></i> Ruangan</a></li>
+					<li><a href="{{ route('aktivitas.pengumuman') }}"><i class="fa fa-bullhorn"></i> Pengumuman</a></li>
+                </ul>
+            </li>
+            @endcan			
+            @can('mengaksesIniRolenyaHarus', 'akma')
+            <li class="treeview">
+                <a href="#">
                     <i class="fa fa-star-half-full"></i>
                     <span>Master</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Dosen</a></li>
+                    <li><a href="{{ route('master.dosen') }}"><i class="fa fa-circle-o"></i> Dosen</a></li>
                     <li><a href="{{ route('master.mahasiswa') }}"><i class="fa fa-circle-o"></i> Mahasiswa</a></li>
                     <li><a href="#"><i class="fa fa-circle-o"></i> Pegawai</a></li>
+                    <li><a href="{{ route('master.grade') }}"><i class="fa fa-circle-o"></i> Grade Nilai</a></li>
                     <li><a href="{{ route('master.mk') }}"><i class="fa fa-circle-o"></i> Mata Kuliah</a></li>
                     <li><a href="#"><i class="fa fa-circle-o"></i> User</a></li>
+                </ul>
+            </li>
+            @endcan
+            @can('dataIniHanyaBisaDipakaiOleh', 'dosen')
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-star-half-full"></i>
+                    <span>Dosen</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('dosen.jadwal') }}"><i class="fa fa-calendar"></i> Jadwal</a></li>
+                    <li><a href="{{ route('dosen.tugas') }}"><i class="fa fa-pencil-square-o"></i> Tugas</a></li>
+                    <li><a href="{{ route('dosen.materi') }}"><i class="fa fa-book"></i> Materi</a></li>
+					<li><a href="{{ route('dosen.pengumuman') }}"><i class="fa fa-volume-up"></i> Pengumuman</a></li>
                 </ul>
             </li>
             @endcan
@@ -63,7 +93,9 @@
                 <ul class="treeview-menu">
                     <li><a href="{{ route('akma.spp') }}"><i class="fa fa-circle-o"></i> Status SPP</a></li>
                     <li><a href="{{ route('akma.dkmk') }}"><i class="fa fa-circle-o"></i> Kelas & Dosen</a></li>
+                    <li><a href="{{ route('akma.absen') }}"><i class="fa fa-circle-o"></i> Absensi Mahasiswa</a></li>
                     <li><a href="{{ route('akma.editmkmhs') }}"><i class="fa fa-circle-o"></i> Edit MK Mahasiswa</a></li>
+                    <li><a href="{{ route('akma.nilai-mahasiswa') }}"><i class="fa fa-circle-o"></i> Nilai Mahasiswa</a></li>
                     <li><a href="{{ route('akma.persetujuanFRS') }}"><i class="fa fa-circle-o"></i> Persetujuan KRS</a></li>
                     <li><a href="{{ route('akma.mkdouble') }}"><i class="fa fa-circle-o"></i> Filter MK Transkrip</a></li>
                 </ul>

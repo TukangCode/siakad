@@ -1,6 +1,6 @@
 @extends($layout)
 @section('content-header')
-    <h1>Data Jadwal<small>Perbaharui Jadwal Anda</small></h1>
+    <h1>Data Jadwal<small>Lihat Semua Jadwal</small></h1>
 @endsection
 @section('content')
     <section id="master-mahasiswa">
@@ -10,7 +10,7 @@
                     <div class="box-body">
                         <table id="master-mhs" class="table"
                                data-toolbar="#dt-toolbar"
-                               data-url="{{ route('dosen.jadwal.getDT')}}"
+                               data-url="{{ route('dosen.semua-jadwal.getDT')}}"
                                data-pagination="true"
                                data-classes="table table-hover table-condensed"
                                data-striped="true"
@@ -24,11 +24,10 @@
                             <tr>
                                 <th data-field="hari" data-sortable="true" data-visible="true">Hari</th>
 								<th data-field="nama" data-sortable="true">Matakuliah</th>
-								<th data-field="kelas" data-sortable="true">Kelas</th>
+								<th data-field="dosen" data-sortable="true">Dosen</th>
                                 <th data-field="jam_masuk" data-sortable="true">Jam masuk</th>
                                 <th data-field="jam_keluar" data-sortable="true">Jam keluar</th>
                                 <th data-field="ruang" data-sortable="true">Ruangan</th>
-                                <th data-width="100px" data-formatter="MasterMhs.loadAksi" data-events="eventAksi">Aksi</th>
                             </tr>
                             </thead>
                         </table>
@@ -47,13 +46,6 @@
             $spp.on('load-success.bs.table', function(e,data){
                 MasterMhs.attachIC();
             });
-        },
-        loadAksi: function(value, row, index) {
-            return [
-                '<a data-toggle="modal" data-target="#modal-util" data-ic-target="#modal-util-body" ' +
-                'title="Edit Jadwal Ini" data-ic-get-from="http://localhost/siakad/public/dosen/jadwal/edit/' + row['id'] + '"' +
-                ' class="btn btn-xs bg-blue"><i class="fa fa-edit"></i></a>'
-            ].join('&nbsp;');
         },
         addFilter: function (p) {
             p.filter = {

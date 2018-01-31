@@ -1,5 +1,4 @@
-<form id="frmMMhs" data-ic-post-to="{{ $action }}"
-    class="form-horizontal" role="form" method="POST">
+<form id="frmMMhs" data-ic-post-to="{{ $action }}" class="form-horizontal" role="form" method="POST">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
     @include('_the_alerter')
     <div class="form-group">

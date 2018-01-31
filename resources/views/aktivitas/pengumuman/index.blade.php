@@ -1,6 +1,6 @@
 @extends($layout)
 @section('content-header')
-    <h1>Data Jadwal<small>Perbaharui Jadwal Anda</small></h1>
+    <h1>Data Pengumuman<small>Perbaharui Pengumuman Anda</small></h1>
 @endsection
 @section('content')
     <section id="master-mahasiswa">
@@ -10,16 +10,8 @@
                     <div class="box-body">
                         <form id="dt-toolbar" class="form-inline" role="form">
                             <a data-toggle="modal" data-target="#modal-util" data-ic-target="#modal-util-body"
-                               data-ic-get-from="{{ route('aktivitas.pengumuman.create')}}" title="Tambah Mahasiswa"
-                               class="btn btn-default form-control"><i class="fa fa-plus-circle"></i> Tambah</a>&nbsp;
-                            <label for="ta">Filter:&nbsp;</label>
-                            <select class="form-control" id="jurusan">
-
-                            </select>
-                            <select class="form-control" id="status">
-  
-                            </select>
-                            <a onclick="MasterMhs.sendFilter(event)" id="send-filter" class="form-control btn btn-sm btn-warning"><i class="fa fa-exchange"></i> </a>
+                               data-ic-get-from="{{ route('aktivitas.pengumuman.create')}}" title="Tambah Pengumuman"
+                               class="btn btn-default form-control"><i class="fa fa-plus-circle"></i> Tambah</a>
                         </form>
                         <table id="master-mhs" class="table"
                                data-toolbar="#dt-toolbar"
@@ -60,10 +52,10 @@
         loadAksi: function(value, row, index) {
             return [
                 '<a data-toggle="modal" data-target="#modal-util" data-ic-target="#modal-util-body" ' +
-                'title="Edit Jadwal Ini" data-ic-get-from="http://localhost/siakad/public/aktivitas/pengumuman/edit/' + row['id'] + '"' +
+                'title="Edit Pengumuman Ini" data-ic-get-from="http://localhost/siakad/public/aktivitas/pengumuman/edit/' + row['id'] + '"' +
                 ' class="btn btn-xs bg-blue"><i class="fa fa-edit"></i></a>',
-                '<a title="Hapus Data Mahasiswa Ini" data-ic-delete-from="http://localhost/siakad/public/aktivitas/pengumuman/delete/' + row['id'] + '"' +
-                    ' data-ic-target="closest tr" data-ic-confirm="Yakin menghapus data mahasiswa ini?" ' +
+                '<a title="Hapus Data Pengumuman Ini" data-ic-delete-from="http://localhost/siakad/public/aktivitas/pengumuman/delete/' + row['id'] + '"' +
+                    ' data-ic-target="closest tr" data-ic-confirm="Yakin menghapus data Pengumuman ini?" ' +
                     ' class="btn btn-xs bg-red-active"><i class="fa fa-trash"></i></a>'
             ].join('&nbsp;');
         },

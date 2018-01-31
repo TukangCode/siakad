@@ -51,7 +51,7 @@
                         <li class="user-footer">
                             <div class="pull-left">
                                 <a href="#" data-toggle="modal" data-target="#modal-util" data-ic-target="#modal-util-body"
-                                   data-ic-get-from="/user/profile" title="Ubah Akun"
+                                   data-ic-get-from="{{ url('/user/profile') }}" title="Ubah Akun"
                                    class="btn btn-default btn-flat">
                                     <i class="fa fa-user"></i>
                                     Akun</a>

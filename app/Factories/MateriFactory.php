@@ -37,12 +37,12 @@ class MateriFactory extends AbstractFactory
 			->join('mata_kuliah as mk', function ($join) {
 				$join->on('p.mata_kuliah_id', '=', 'mk.id');
 				})	
-            ->select(['m.id','p.mata_kuliah_id','mk.nama','m.pengampu_id','m.nama_materi','m.filename'])
+            ->select(['m.id','p.mata_kuliah_id','p.kelas','mk.nama','m.pengampu_id','m.nama_materi','m.filename'])
 			->where('p.dosen_id', '=', \Auth::user()->owner_id);
 
         return $this->getBTData($pagination,
             $builder,
-            ['id','nama_materi','nama','filename','pengampu_id', 'mata_kuliah_id'] 
+            ['id','nama_materi','nama','filename','pengampu_id', 'mata_kuliah_id','kelas'] 
 			// karena ada yang double untuk nama maka mapping ke m.nama (matakuliah)
         );
     }

@@ -71,4 +71,7 @@ $('#frmMMhs').on('error.ic', function (evt, elt, stat, str, xhr) {
     $('#message-success').text("{{$success}}").closest('div.form-group').show();
     MasterMhs.onEditSuccess(); // trigger it!
 @endif
+@if(isset($error))
+    $('#message-error').text("{{$error}}").closest('div.form-group').show();
+@endif
 </script>

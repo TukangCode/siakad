@@ -26,6 +26,7 @@ class MahasiswaApiController extends Controller
 			->join('rencana_studi','rincian_studi.rencana_studi_id','=','rencana_studi.id')
 			->select(['mata_kuliah.nama as matakuliah','jadwal.hari','jadwal.jam_masuk','jadwal.jam_keluar','ruangans.ruang','dosen.nama as dosen'])
 			->where('mahasiswa_id','=',$nim)
+			->orderBy('jadwal.hari','desc')
 			->paginate(20);
         return Response()->json($jadwal, 200);
 	}

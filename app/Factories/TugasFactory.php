@@ -37,12 +37,12 @@ class TugasFactory extends AbstractFactory
 			->join('mata_kuliah as m', function ($join) {
 				$join->on('p.mata_kuliah_id', '=', 'm.id');
 				})	
-            ->select(['t.id','p.dosen_id', 'p.mata_kuliah_id','m.nama','t.pengampu_id','t.nama_tugas','t.keterangan','t.deadline'])
+            ->select(['t.id','p.dosen_id', 'p.mata_kuliah_id','m.nama','t.pengampu_id','p.kelas','t.nama_tugas','t.keterangan','t.deadline'])
 			->where('p.dosen_id', '=', \Auth::user()->owner_id);
 
         return $this->getBTData($pagination,
             $builder,
-            ['id','nama_tugas','keterangan','deadline','dosen_id', 'mata_kuliah_id'] 
+            ['id','nama_tugas','keterangan','deadline','dosen_id', 'mata_kuliah_id','kelas'] 
 			// karena ada yang double untuk nama maka mapping ke m.nama (matakuliah)
         );
     }

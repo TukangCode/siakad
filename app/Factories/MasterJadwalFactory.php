@@ -39,11 +39,11 @@ class MasterJadwalFactory extends AbstractFactory
 			->join('dosen as d', function ($join) {
 				$join->on('p.dosen_id', '=', 'd.nomor_induk');
 				})	
-            ->select(['j.id','j.hari', 'j.jam_masuk', 'j.jam_keluar','j.pengampu_id','d.nama as dosen','m.nama','r.ruang']);
+            ->select(['j.id','j.hari','j.jam_masuk','j.jam_keluar','j.pengampu_id','d.nama as dosen','m.nama','p.kelas','r.ruang']);
 
         return $this->getBTData($pagination,
             $builder,
-            ['id','hari', 'jam_masuk', 'jam_keluar', 'dosen', 'pengampu_id', 'matakuliah','ruang']
+            ['id','hari', 'jam_masuk', 'jam_keluar', 'dosen', 'pengampu_id', 'matakuliah','kelas','ruang']
 		);
     }
     public function getDataJadwal($id = null)
@@ -131,7 +131,7 @@ class MasterJadwalFactory extends AbstractFactory
 		else if(
 			Jadwal::where('hari', '=', $request->input('hari'))
 			->where('ruangan_id', '=', $request->input('ruangan_id'))
-			->where('jam_keluar', '<=', $request->input('jam_masuk'))->first()
+			->where('jam_keluar', '>=', $request->input('jam_masuk'))->first()
 			){
 			return true;
 		}else{

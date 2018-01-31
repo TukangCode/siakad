@@ -15,7 +15,7 @@
     <div class="row">
         <div class="">
             <div class="well dialog">
-				<img src="/plugins/logo_stmikplk.jpg" width="80px">
+				<img src="http://localhost/siakad/public/plugins/logo_stmikplk.jpg" width="80px">
                 <h4 class="text-primary"><strong>STMIK Palangka Raya</strong></h4>
                 <h6 class="text-danger"><strong>{{ config('siakad.slogan') }}</strong></h6>
 				<hr>

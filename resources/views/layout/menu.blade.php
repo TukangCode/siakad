@@ -66,6 +66,7 @@
                     <li><a href="{{ route('dosen.tugas') }}"><i class="fa fa-pencil-square-o"></i> Tugas</a></li>
                     <li><a href="{{ route('dosen.materi') }}"><i class="fa fa-book"></i> Materi</a></li>
 					<li><a href="{{ route('dosen.pengumuman') }}"><i class="fa fa-volume-up"></i> Pengumuman</a></li>
+					<li><a href="{{ route('dosen.semua-jadwal') }}"><i class="fa fa-eye"></i> Lihat Semua Jadwal</a></li>
                 </ul>
             </li>
             @endcan

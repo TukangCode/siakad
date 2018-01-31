@@ -1,6 +1,6 @@
 @extends($layout)
 @section('content-header')
-    <h1>Data Jadwal<small>Perbaharui Jadwal Anda</small></h1>
+    <h1>Data Ruangan<small>Perbaharui Ruangan Anda</small></h1>
 @endsection
 @section('content')
     <section id="master-mahasiswa">
@@ -52,9 +52,9 @@
         loadAksi: function(value, row, index) {
             return [
                 '<a data-toggle="modal" data-target="#modal-util" data-ic-target="#modal-util-body" ' +
-                'title="Edit Jadwal Ini" data-ic-get-from="http://localhost/siakad/public/aktivitas/ruangan/edit/' + row['id'] + '"' +
+                'title="Edit Ruangan Ini" data-ic-get-from="http://localhost/siakad/public/aktivitas/ruangan/edit/' + row['id'] + '"' +
                 ' class="btn btn-xs bg-blue"><i class="fa fa-edit"></i></a>',
-				'<a title="Hapus Data Jadwal Ini" data-ic-delete-from="http://localhost/siakad/public/aktivitas/ruangan/delete/' + row['id'] + '"' +
+				'<a title="Hapus Data Ruangan Ini" data-ic-delete-from="http://localhost/siakad/public/aktivitas/ruangan/delete/' + row['id'] + '"' +
                     ' data-ic-target="closest tr" data-ic-confirm="Yakin menghapus data Ruangan ini?" ' +
                     ' class="btn btn-xs bg-red-active"><i class="fa fa-trash"></i></a>'
             ].join('&nbsp;');

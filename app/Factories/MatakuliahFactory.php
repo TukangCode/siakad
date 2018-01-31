@@ -33,11 +33,15 @@ class MatakuliahFactory extends AbstractFactory
         $p = PengampuKelas::join('mata_kuliah as m', function($join){
                 $join->on('pengampu_kelas.mata_kuliah_id', '=', 'm.id');
 		    })
-			->select('pengampu_kelas.id','m.nama','m.kode')
+            ->join('dosen as d', function($join){
+                $join->on('pengampu_kelas.dosen_id', '=', 'd.nomor_induk');
+            })
+			->select('pengampu_kelas.id','m.nama','m.kode','pengampu_kelas.kelas','d.nama as dosen')
+			->orderBy('nama','asc')
 			->get();
         $a = [];
         foreach ($p as $m) {
-            $a[$m->id] = $m->kode ." ".$m->nama;
+            $a[$m->id] = $m->nama ." (". $m->dosen ." kelas ". $m->kelas .")";
         }
         return $a;
     }
@@ -52,11 +56,11 @@ class MatakuliahFactory extends AbstractFactory
         $p = PengampuKelas::join('mata_kuliah as m', function($join){
                 $join->on('pengampu_kelas.mata_kuliah_id', '=', 'm.id');
 		    })
-			->select('pengampu_kelas.id','m.nama')
+			->select('pengampu_kelas.id','m.nama','pengampu_kelas.kelas')
 			->where('pengampu_kelas.dosen_id', '=', \Auth::user()->owner_id)->get();
         $a = [];
         foreach ($p as $m) {
-            $a[$m->id] =$m->nama;
+            $a[$m->id] =$m->nama ." - Kelas ". $m->kelas;
         }
         return $a;
     }

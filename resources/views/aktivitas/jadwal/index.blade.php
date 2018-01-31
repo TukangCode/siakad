@@ -27,8 +27,9 @@
                                data-mobile-responsive="true">
                             <thead>
                             <tr>
-                                <th data-field="hari" data-sortable="true" data-visible="true">hari</th>
+                                <th data-field="hari" data-sortable="true" data-visible="true">Hari</th>
 								<th data-field="nama" data-sortable="true">Matakuliah</th>
+								<th data-field="kelas" data-sortable="true">Kelas</th>
                                 <th data-field="jam_masuk" data-sortable="true">Jam masuk</th>
                                 <th data-field="jam_keluar" data-sortable="true">Jam keluar</th>
 								<th data-field="dosen" data-sortable="true">Dosen</th>

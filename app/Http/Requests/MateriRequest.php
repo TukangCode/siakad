@@ -26,7 +26,7 @@ class MateriRequest extends Request
         return [
 			'pengampu_id' => 'required',
 			'nama_materi' => 'required',
-			'filename' => 'required|mimes:zip,rar,txt,jpeg,jpg,png',
+			'filename' => 'required|mimes:pdf,zip,rar,doc,docx,xls,xlsx,ppt,pptx',
         ];
     }
 }

@@ -24,13 +24,13 @@ class MasterDosenRequest extends Request
     public function rules()
     {
         return [
-            'nama' => 'required',
+            /*'nama' => 'required',
 			'nomor_induk' => 'required',
             'jurusan_id' => 'required|exists:jurusan,id',
             'tempat_lahir' => 'required',
             'tgl_lahir' => 'required',
             'jenis_kelamin' =>'required',
-            'agama' => 'required'
+            'agama' => 'required'*/
         ];
     }
 }

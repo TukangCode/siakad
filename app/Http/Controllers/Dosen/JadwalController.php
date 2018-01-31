@@ -31,10 +31,14 @@ class JadwalController extends Controller
     }
     public function update($id, JadwalRequest $request)
     {
-        $input = $request->all();
-        if($this->factory->update($id, $input)) {
-            return $this->edit($id)->with('success', "Data Jadwal telah terupdate!");
-        }
+		if($this->factory->checkValidJadwal($id,$request)){
+			return $this->edit($id)->with('error', "ada jadwal yang sama!");
+		}else{
+			$input = $request->all();
+			if($this->factory->update($id, $input)) {
+        		return $this->edit($id)->with('success', "Data Jadwal telah terupdate!");
+			}
+		}
         return response(json_encode($this->factory->getErrors()), 500);
     }
     public function store(JadwalRequest $request)

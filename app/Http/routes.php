@@ -52,12 +52,12 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/master/mahasiswa/update/{nim}', ['as' => 'master.mahasiswa.update', 'uses' => 'Master\MahasiswaController@update']);
         Route::delete('/master/mahasiswa/delete/{nim}', ['as' => 'master.mahasiswa.delete', 'uses' => 'Master\MahasiswaController@delete']);
 
-        // master mahasiswa
+        // master dosen
         Route::get('/master/dosen/', ['as' => 'master.dosen', 'uses' => 'Master\DosenController@index']);
         Route::get('/master/dosen/getDT', ['as' => 'master.dosen.getDT', 'uses' => 'Master\DosenController@getDataBtTable']);
         Route::get('/master/dosen/create', ['as' => 'master.dosen.create', 'uses' => 'Master\DosenController@create']);
         Route::post('/master/dosen/store', ['as' => 'master.dosen.store', 'uses' => 'Master\DosenController@store']);
-        Route::get('/master/dosen/edit/{nomor_induk}}', ['as' => 'master.dosen.edit', 'uses' => 'Master\DosenController@edit']);
+        Route::get('/master/dosen/edit/{nomor_induk}', ['as' => 'master.dosen.edit', 'uses' => 'Master\DosenController@edit']);
         Route::post('/master/dosen/update/{nomor_induk}', ['as' => 'master.dosen.update', 'uses' => 'Master\DosenController@update']);
         Route::delete('/master/dosen/delete/{nomor_induk}', ['as' => 'master.dosen.delete', 'uses' => 'Master\DosenController@delete']);
 		
@@ -154,6 +154,8 @@ Route::group(['middleware' => ['web']], function () {
 		Route::post('/dosen/jadwal/store', ['as' => 'dosen.jadwal.store', 'uses' => 'Dosen\JadwalController@store']);
 		Route::get('/dosen/jadwal/edit/{id}', ['as' => 'dosen.jadwal.edit', 'uses' => 'Dosen\JadwalController@edit']);		
         Route::post('/dosen/jadwal/update/{id}', ['as' => 'dosen.jadwal.update', 'uses' => 'Dosen\JadwalController@update']);		
+		Route::get('/dosen/semua-jadwal/getDT', ['as' => 'dosen.semua-jadwal.getDT', 'uses' => 'Dosen\SemuaJadwalController@getDataBtTable']);
+		Route::get('/dosen/semua-jadwal', ['as' => 'dosen.semua-jadwal', 'uses' => 'Dosen\SemuaJadwalController@index']);
 
 		//Tugas
 		Route::get('/dosen/tugas/', ['as' => 'dosen.tugas', 'uses' => 'Dosen\TugasController@index']);

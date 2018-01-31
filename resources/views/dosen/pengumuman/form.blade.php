@@ -1,7 +1,7 @@
 <form id="frmMMhs" data-ic-post-to="{{ $action }}"
     class="form-horizontal" role="form" method="POST">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-	<input type="hidden" name="dosen_id" value="{{ Auth::user()->owner_id }}">
+	<input type="hidden" name="user_id" value="{{ Auth::user()->owner_id }}">
     @include('_the_alerter')
     <div class="form-group">
         <label for="perihal" class="col-md-3 control-label">Perihal</label>

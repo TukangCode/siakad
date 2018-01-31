@@ -11,15 +11,7 @@
                         <form id="dt-toolbar" class="form-inline" role="form">
                             <a data-toggle="modal" data-target="#modal-util" data-ic-target="#modal-util-body"
                                data-ic-get-from="{{ route('dosen.tugas.create')}}" title="Tambah Tugas"
-                               class="btn btn-default form-control"><i class="fa fa-plus-circle"></i> Tambah</a>&nbsp;
-                            <label for="ta">Filter:&nbsp;</label>
-                            <select class="form-control" id="jurusan">
-
-                            </select>
-                            <select class="form-control" id="status">
-  
-                            </select>
-                            <a onclick="MasterMhs.sendFilter(event)" id="send-filter" class="form-control btn btn-sm btn-warning"><i class="fa fa-exchange"></i> </a>
+                               class="btn btn-default form-control"><i class="fa fa-plus-circle"></i> Tambah</a>
                         </form>
                         <table id="master-mhs" class="table"
                                data-toolbar="#dt-toolbar"
@@ -36,6 +28,7 @@
                             <thead>
                             <tr>
                                 <th data-field="nama" data-sortable="true" >Matakuliah</th>
+								<th data-field="kelas" data-sortable="true" >Kelas</th>
                                 <th data-field="nama_tugas" data-sortable="true" >Tugas</th>
 								<th data-field="keterangan" data-sortable="true">Keterangan</th>
                                 <th data-field="deadline" data-sortable="true" >Deadline</th>
